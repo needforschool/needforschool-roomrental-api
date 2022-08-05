@@ -1,7 +1,7 @@
-package com.kominfo.halaqohit.springbootdatajpamongodb.controller;
+package fr.antoinek.roomrental.controller;
 
-import com.kominfo.halaqohit.springbootdatajpamongodb.entity.Pets;
-import com.kominfo.halaqohit.springbootdatajpamongodb.repository.PetsRepository;
+import fr.antoinek.roomrental.entity.Pets;
+import fr.antoinek.roomrental.repository.PetsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

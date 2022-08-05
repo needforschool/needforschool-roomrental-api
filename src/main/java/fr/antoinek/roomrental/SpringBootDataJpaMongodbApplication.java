@@ -1,4 +1,4 @@
-package com.kominfo.halaqohit.springbootdatajpamongodb;
+package fr.antoinek.roomrental;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

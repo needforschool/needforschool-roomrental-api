@@ -8,7 +8,7 @@
         <version>2.1.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.kominfo.halaqohit</groupId>
+    <groupId>fr.antoinek.roomrental</groupId>
     <artifactId>spring-boot-data-jpa-mongodb</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-boot-data-jpa-mongodb</name>

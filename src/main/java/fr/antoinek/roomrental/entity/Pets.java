@@ -1,4 +1,4 @@
-package com.kominfo.halaqohit.springbootdatajpamongodb.entity;
+package fr.antoinek.roomrental.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

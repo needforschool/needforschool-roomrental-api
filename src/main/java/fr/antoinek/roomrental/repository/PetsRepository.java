@@ -1,6 +1,6 @@
-package com.kominfo.halaqohit.springbootdatajpamongodb.repository;
+package fr.antoinek.roomrental.repository;
 
-import com.kominfo.halaqohit.springbootdatajpamongodb.entity.Pets;
+import fr.antoinek.roomrental.entity.Pets;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

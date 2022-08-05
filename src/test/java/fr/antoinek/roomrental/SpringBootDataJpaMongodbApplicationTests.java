@@ -1,4 +1,4 @@
-package com.kominfo.halaqohit.springbootdatajpamongodb;
+package fr.antoinek.roomrental;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
