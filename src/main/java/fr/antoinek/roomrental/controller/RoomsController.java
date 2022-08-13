@@ -40,7 +40,35 @@ public class RoomsController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
 
+    // search room by attendees, videoProjector, whiteboard, handicapAccess, date, morning or afternoon availability
+    @GetMapping("/search")
+    public List<Rooms> searchRooms(@RequestParam(value = "attendees", required = true) Integer attendees,
+                                   @RequestParam(value = "videoProjector", required = true) Boolean videoProjector,
+                                   @RequestParam(value = "whiteboard", required = true) Boolean whiteboard,
+                                   @RequestParam(value = "handicapAccess", required = true) Boolean handicapAccess,
+                                   @RequestParam(value = "date", required = true) String date,
+                                   @RequestParam(value = "morning", required = true) Boolean morning,
+                                   @RequestParam(value = "afternoon", required = true) Boolean afternoon) {
+        List<Rooms> rooms = repository.findAll();
+        // filter rooms
+        // filter if attendees is equal or greater than the attendees of the room
+        rooms.removeIf(room -> room.getAttendees() < attendees);
+
+        // filter if videoProjector is equal to the videoProjector of the room
+        rooms.removeIf(room -> room.getVideoProjector() != videoProjector);
+
+        // filter if whiteboard is equal to the whiteboard of the room
+        rooms.removeIf(room -> room.getWhiteboard() != whiteboard);
+
+        // filter if handicapAccess is equal to the handicapAccess of the room
+        rooms.removeIf(room -> room.getHandicapAccess() != handicapAccess);
+
+        // see if the room is available for the given date and time (morning or afternoon) in rentals
+
+        // return the list of rooms
+        return rooms;
     }
 
     @PutMapping("/{id}")
