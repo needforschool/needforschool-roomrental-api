@@ -19,6 +19,7 @@ public class Rooms {
     public String id;
 
     public String name;
+    public String thumbnailUrl;
     public Integer attendees;
     public Boolean videoProjector;
     public Boolean whiteboard;
@@ -28,9 +29,10 @@ public class Rooms {
     public Rooms() {
     }
 
-    public Rooms(String id, String name, Integer attendees, Boolean videoProjector, Boolean whiteboard , Boolean handicapAccess) {
+    public Rooms(String id, String name, String thumbnailUrl, Integer attendees, Boolean videoProjector, Boolean whiteboard, Boolean handicapAccess) {
         this.id = id;
         this.name = name;
+        this.thumbnailUrl = thumbnailUrl;
         this.attendees = attendees;
         this.videoProjector = videoProjector;
         this.whiteboard = whiteboard;
@@ -51,6 +53,14 @@ public class Rooms {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public Integer getAttendees() {
