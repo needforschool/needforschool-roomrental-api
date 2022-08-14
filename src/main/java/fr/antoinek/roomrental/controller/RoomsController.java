@@ -1,6 +1,8 @@
 package fr.antoinek.roomrental.controller;
 
+import fr.antoinek.roomrental.entity.Rentals;
 import fr.antoinek.roomrental.entity.Rooms;
+import fr.antoinek.roomrental.repository.RentalsRepository;
 import fr.antoinek.roomrental.repository.RoomsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +29,9 @@ import java.util.Optional;
 public class RoomsController {
     @Autowired
     private RoomsRepository repository;
+
+    @Autowired
+    private RentalsRepository rentalsRepository;
 
     @GetMapping
     public List<Rooms> getAllRooms() {
@@ -51,6 +57,11 @@ public class RoomsController {
                                    @RequestParam(value = "date", required = true) String date,
                                    @RequestParam(value = "morning", required = true) Boolean morning,
                                    @RequestParam(value = "afternoon", required = true) Boolean afternoon) {
+        // first of all check if morning or afternoon is true else return empty list
+        if (!morning && !afternoon) {
+            return new ArrayList<>();
+        }
+
         List<Rooms> rooms = repository.findAll();
         // filter rooms
         // filter if attendees is equal or greater than the attendees of the room
@@ -65,7 +76,21 @@ public class RoomsController {
         // filter if handicapAccess is equal to the handicapAccess of the room
         rooms.removeIf(room -> room.getHandicapAccess() != handicapAccess);
 
-        // see if the room is available for the given date and time (morning or afternoon) in rentals
+        // verify if the room is available for the given date and time (morning or afternoon) and not valid in rentals
+        rooms.removeIf(room -> {
+            List<Rentals> rentals = rentalsRepository.findAll();
+            for (Rentals rental : rentals) {
+                if (rental.getRoom().getId().equals(room.getId())
+                        && rental.getValid()
+                        && rental.getDate().equals(date)
+                        && rental.getMorning() == morning
+                        && rental.getAfternoon() == afternoon
+                ) {
+                    return true;
+                }
+            }
+            return false;
+        });
 
         // return the list of rooms
         return rooms;
@@ -92,7 +117,7 @@ public class RoomsController {
             return new ResponseEntity<>("Fail to delete!", HttpStatus.EXPECTATION_FAILED);
         }
 
-        return new ResponseEntity<>("Pet has been deleted!", HttpStatus.OK);
+        return new ResponseEntity<>("Room has been deleted!", HttpStatus.OK);
     }
 
     @DeleteMapping("/all")
