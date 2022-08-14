@@ -1,6 +1,9 @@
 package fr.antoinek.roomrental.entity;
 
+import fr.antoinek.roomrental.repository.RoomsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -25,6 +28,7 @@ public class Rentals {
     public String date;
     public Boolean morning;
     public Boolean afternoon;
+    @DBRef
     public Rooms room;
     public Boolean valid;
 
@@ -32,7 +36,7 @@ public class Rentals {
     public Rentals() {
     }
 
-    public Rentals(String id, String firstName, String lastName, String email, String phone, String date, Boolean morning, Boolean afternoon, Rooms room, Boolean valid) {
+    public Rentals(String id, String firstName, String lastName, String email, String phone, String date, Boolean morning, Boolean afternoon, Rooms room) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,7 +46,6 @@ public class Rentals {
         this.morning = morning;
         this.afternoon = afternoon;
         this.room = room;
-        this.valid = valid;
     }
 
     public String getId() {
