@@ -51,9 +51,24 @@ public class RentalsController {
     }
 
     @PostMapping
-    public Rentals createRental(@Valid @RequestBody Rentals rentals) {
-        repository.save(rentals);
-        return rentals;
+    public Rentals createRental(@Valid @RequestBody Rentals rental) {
+        rental.setValid(false);
+
+        List<Rentals> rentals = repository.findAll();
+        for (Rentals r : rentals) {
+           // check if a rental from rentals is valid at the same time as the new rental then return null
+            if (r.getValid() && r.getDate().equals(rental.getDate()) && (r.getMorning().equals(rental.getMorning()) || r.getAfternoon().equals(rental.getAfternoon()))) {
+                return null;
+            }
+
+            // avoid duplicate rentals by checking if the new rental is the same email, firstname, lastname, date, morning or afternoon
+            if (r.getEmail().equals(rental.getEmail()) && r.getFirstName().equals(rental.getFirstName()) && r.getLastName().equals(rental.getLastName()) && r.getDate().equals(rental.getDate()) && r.getMorning().equals(rental.getMorning()) && r.getAfternoon().equals(rental.getAfternoon())) {
+                return null;
+            }
+        }
+
+        repository.save(rental);
+        return rental;
     }
 
     @DeleteMapping("/{id}")
