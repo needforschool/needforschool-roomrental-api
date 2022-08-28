@@ -28,6 +28,8 @@ public class Rentals {
     public String date;
     public Boolean morning;
     public Boolean afternoon;
+    public Boolean coffee;
+    public Boolean lunch;
     @DBRef
     public Rooms room;
     public Boolean valid;
@@ -36,7 +38,7 @@ public class Rentals {
     public Rentals() {
     }
 
-    public Rentals(String id, String firstName, String lastName, String email, String phone, String date, Boolean morning, Boolean afternoon, Rooms room) {
+    public Rentals(String id, String firstName, String lastName, String email, String phone, String date, Boolean morning, Boolean afternoon, Boolean coffee, Boolean lunch, Rooms room) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,6 +47,8 @@ public class Rentals {
         this.date = date;
         this.morning = morning;
         this.afternoon = afternoon;
+        this.coffee = coffee;
+        this.lunch = lunch;
         this.room = room;
     }
 
@@ -110,6 +114,22 @@ public class Rentals {
 
     public void setAfternoon(Boolean afternoon) {
         this.afternoon = afternoon;
+    }
+
+    public Boolean getCoffee() {
+        return coffee;
+    }
+
+    public void setCoffee(Boolean coffee) {
+        this.coffee = coffee;
+    }
+
+    public Boolean getLunch() {
+        return lunch;
+    }
+
+    public void setLunch(Boolean lunch) {
+        this.lunch = lunch;
     }
 
     public Rooms getRoom() {
