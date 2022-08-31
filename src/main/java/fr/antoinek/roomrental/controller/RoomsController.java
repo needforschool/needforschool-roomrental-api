@@ -104,30 +104,8 @@ public class RoomsController {
     }
 
     @PostMapping
-    public Rooms createPet(@Valid @RequestBody Rooms rooms) {
+    public Rooms createRoom(@Valid @RequestBody Rooms rooms) {
         repository.save(rooms);
         return rooms;
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRoom(@PathVariable String id) {
-        try {
-            repository.deleteById(id);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Fail to delete!", HttpStatus.EXPECTATION_FAILED);
-        }
-
-        return new ResponseEntity<>("Room has been deleted!", HttpStatus.OK);
-    }
-
-    @DeleteMapping("/all")
-    public ResponseEntity<String> deleteAllRooms() {
-        try {
-            repository.deleteAll();
-        } catch (Exception e) {
-            return new ResponseEntity<>("Fail to delete!", HttpStatus.EXPECTATION_FAILED);
-        }
-
-        return new ResponseEntity<>("All Rooms has been deleted!", HttpStatus.OK);
     }
 }

@@ -132,26 +132,4 @@ public class RentalsController {
         repository.save(rental);
         return rental;
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRental(@PathVariable String id) {
-        try {
-            repository.deleteById(id);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Fail to delete!", HttpStatus.EXPECTATION_FAILED);
-        }
-
-        return new ResponseEntity<>("Pet has been deleted!", HttpStatus.OK);
-    }
-
-    @DeleteMapping("/all")
-    public ResponseEntity<String> deleteAllRentals() {
-        try {
-            repository.deleteAll();
-        } catch (Exception e) {
-            return new ResponseEntity<>("Fail to delete!", HttpStatus.EXPECTATION_FAILED);
-        }
-
-        return new ResponseEntity<>("All Rentals has been deleted!", HttpStatus.OK);
-    }
 }
